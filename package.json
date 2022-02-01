@@ -1,0 +1,23 @@
+{
+  "name": "random-rick-morty-api",
+  "version": "1.0.0",
+  "description": "Random HTTP API for learning/practicing Javascript and the Nodejs development environment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raulmanzas/random-rick-morty-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raulmanzas/random-rick-morty-api/issues"
+  },
+  "homepage": "https://github.com/raulmanzas/random-rick-morty-api#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
