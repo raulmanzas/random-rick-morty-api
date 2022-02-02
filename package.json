@@ -4,8 +4,7 @@
   "description": "Random HTTP API for learning/practicing Javascript and the Nodejs development environment",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +18,12 @@
   "homepage": "https://github.com/raulmanzas/random-rick-morty-api#readme",
   "dependencies": {
     "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "nodemonConfig": {
+    "ignore": ["test/*", "docs/*"],
+    "delay": 1000
   }
 }
