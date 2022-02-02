@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/raulmanzas/random-rick-morty-api#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "winston": "^3.5.1"
   },
   "devDependencies": {
     "eslint": "^8.8.0",
