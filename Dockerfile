@@ -1,24 +1,25 @@
 FROM node:17-alpine
 
-RUN apk update
-
-# RUN adduser -D rick-morty-user \
-#   && mkdir -p /etc/sudoers.d \
-#   && echo "rick-morty-user ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/rick-morty-user \
-#   && chmod 0440 /etc/sudoers.d/rick-morty-user
-# WORKDIR /home/rick-morty-user
-# USER rick-morty-user
-
-WORKDIR /api
-
-COPY package*.json .
-RUN ls
-RUN npm install
-
-COPY . .
-
 ENV PORT 8080
 ENV NODE_ENV development
+ENV USER rick-morty-user
 
-EXPOSE 8080/tcp
+RUN apk update
+
+RUN adduser -D ${USER} \
+  && mkdir -p /etc/sudoers.d \
+  && echo "${USER} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${USER} \
+  && chmod 0440 /etc/sudoers.d/${USER}
+WORKDIR /home/${USER}
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . ./
+
+EXPOSE ${PORT}/tcp
+
+USER ${USER}
+
 CMD [ "npm", "start" ]
