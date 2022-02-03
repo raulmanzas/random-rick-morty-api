@@ -4,7 +4,8 @@ function loadEnvironment() {
   dotenv.config();
   return {
     env: process.env.NODE_ENV,
-    port: process.env.PORT
+    port: process.env.PORT,
+    logLevel: process.env.LOG_LEVEL
   };
 }
 
