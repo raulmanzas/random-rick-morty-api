@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/raulmanzas/random-rick-morty-api#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "winston": "^3.5.1"
   },
