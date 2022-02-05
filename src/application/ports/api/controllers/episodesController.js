@@ -1,3 +1,5 @@
+const responseMapper = require('../mappers/responseMapper');
+
 function listAllEpisodes(_, res) {
   const mockResponse = [
     {
@@ -16,7 +18,7 @@ function listAllEpisodes(_, res) {
       episode: 'E03'
     }
   ];
-  return res.status(200).json(mockResponse);
+  return res.status(200).json(responseMapper.mapResponse(mockResponse));
 }
 
 module.exports = {

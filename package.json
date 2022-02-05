@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon app.js",
     "lint": "npx eslint .",
+    "test": "mocha test/unit/**/*Test.js",
     "integration-test": "mocha test/integration/**/*Test.js"
   },
   "repository": {
