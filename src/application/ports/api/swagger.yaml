@@ -35,6 +35,20 @@ paths:
           description: "Internal Server Error"
 
 definitions:
+  StandardResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+        description: "The moment in which the response was sent"
+        example: "1644085936373"
+      message:
+        type: "string"
+        description: "Response message. In case of an error, the error message will be sent here."
+      data:
+        type: "any"
+        description: "The actual result of the request. It's schema depends on the request."
+
   Episode:
     type: "object"
     properties:
