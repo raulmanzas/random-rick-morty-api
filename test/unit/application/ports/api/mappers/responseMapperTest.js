@@ -4,6 +4,7 @@ const responseMapper = require('../../../../../../src/application/ports/api/mapp
 
 describe('ResponseMapper', () => {
   const fakeMessage = 'The object is empty';
+
   it('when mapping an empty object it should return response with empty data', () => {
     const response = responseMapper.mapResponse({}, fakeMessage);
 
