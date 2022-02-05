@@ -1,0 +1,51 @@
+swagger: "2.0"
+
+info:
+  description: A random HTTP API.
+  version: "0.0.1"
+  title: "Random Rick and Morty API"
+
+host: localhost:8080
+basePath: "/api/v1"
+
+tags:
+- name: "Episodes"
+  description: "All about the episodes"
+
+schemes:
+- "http"
+
+paths:
+  /episodes:
+    get:
+      tags:
+      - "Episodes"
+      summary: "List of all Rick and Morty episodes"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/Episode"
+        "500":
+          description: "Internal Server Error"
+
+definitions:
+  Episode:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+        description: "Public title of the episode"
+      season:
+        type: "string"
+        description: "Season in which the episode belongs, in the popular format S<season_number>."
+        example: "S01"
+      episode:
+        type: "string"
+        description: "Episode number, in the popular format E<season_number>."
+        example: "E03"

@@ -1,17 +1,17 @@
 function listAllEpisodes(_, res) {
   const mockResponse = [
     {
-      name: 'Pilot',
+      title: 'Pilot',
       season: 'S01',
       episode: 'E01'
     },
     {
-      name: 'Lawnmower Dog',
+      title: 'Lawnmower Dog',
       season: 'S01',
       episode: 'E02'
     },
     {
-      name: 'Anatomy Park',
+      title: 'Anatomy Park',
       season: 'S01',
       episode: 'E03'
     }
