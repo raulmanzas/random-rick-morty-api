@@ -13,8 +13,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 const { port } = environment;
 
 module.exports = {
+  getApplication() { return app; },
   run() {
-    app.listen(port, () => {
+    return app.listen(port, () => {
       logger.info(`API running on port ${port}...`);
     });
   }
