@@ -16,11 +16,9 @@ function buildClient(baseUrl, timeout = 1000) {
     timeout
   });
 
-  console.log(client);
   retry(client, {
     retries: 3
   });
-  console.log(client);
 
   client.interceptors.request.use(logRequest);
   client.interceptors.response.use(logResponse);
