@@ -12,13 +12,15 @@ function logResponse(res) {
 
 function buildClient(baseUrl, timeout = 1000) {
   const client = axios.create({
-    baseURL: baseUrl,
+    baseURL: baseUrl || 'localhost',
     timeout
   });
 
+  console.log(client);
   retry(client, {
     retries: 3
   });
+  console.log(client);
 
   client.interceptors.request.use(logRequest);
   client.interceptors.response.use(logResponse);
