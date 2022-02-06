@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/raulmanzas/random-rick-morty-api#readme",
   "dependencies": {
+    "axios": "^0.25.0",
+    "axios-retry": "^3.2.4",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "swagger-ui-express": "^4.3.0",
