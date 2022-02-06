@@ -2,6 +2,10 @@
 
 This file documents all you need to know in order to run the project in your own environment.
 
+- [Running the project](#running-the-project)
+- [Running the tests](#running-the-tests)
+- [Using the API](#using-the-api)
+
 ### Running the project
 
 Follow the steps below to setup the local environment and run the project:
@@ -44,3 +48,6 @@ Running integration tests:
 ```shell 
 $ npm run integration-test
 ```
+
+### Using the API
+A good way to start using the API is exploring the endpoints through Swagger. Once you have the project running, just hit http://localhost:8080/api-docs. The port may be different depending on which port you configured on the `.env fle.
