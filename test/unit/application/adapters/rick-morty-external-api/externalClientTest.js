@@ -1,6 +1,6 @@
 const sinon = require('sinon');
 const { assert } = require('chai');
-const mockResponse = require('./mockExternalApiResponses.json');
+let mockResponse = require('./mockExternalApiResponses.json');
 const apiClient = require('../../../../../src/application/adapters/rick-morty-external-api/externalClient');
 const httpClient = require('../../../../../src/application/adapters/rick-morty-external-api/httpClient');
 
@@ -15,26 +15,37 @@ const mockHttpClient = {
 };
 
 describe('ExternalClient', () => {
-  before((done) => {
-    sinon.stub(httpClient, 'buildClient').returns(mockHttpClient);
-    done();
-  });
+  describe('getAllEpisodes', () => {
+    before((done) => {
+      const baseUrl = 'https://rickandmortyapi.com/api';
+      sinon
+        .stub(httpClient, 'buildClient')
+        .withArgs(baseUrl)
+        .returns(mockHttpClient)
+        .alwaysCalledWith('/episodes');
+      done();
+    });
 
-  it('when getting all episodes it should return simplified response', async () => {
-    const response = await apiClient.getAllEpisodes();
+    it('when getting all episodes it should return simplified response', async () => {
+      const response = await apiClient.getAllEpisodes();
 
-    assert.isArray(response);
-    response.forEach((episode, index) => {
-      assert.strictEqual(episode.id, mockResponse[index].id);
-      assert.strictEqual(episode.title, mockResponse[index].name);
-      assert.strictEqual(episode.episode, mockResponse[index].episode);
-      assert.notExists(episode.characters);
-      assert.notExists(episode.url);
-      assert.notExists(episode.created);
+      assert.isArray(response);
+      response.forEach((episode, index) => {
+        assert.strictEqual(episode.id, mockResponse[index].id);
+        assert.strictEqual(episode.title, mockResponse[index].name);
+        assert.strictEqual(episode.episode, mockResponse[index].episode);
+        assert.notExists(episode.characters);
+        assert.notExists(episode.url);
+        assert.notExists(episode.created);
+      });
+    });
+
+    it('when getting all episodes but none is found should return empty array', async () => {
+      mockResponse = [];
+      const response = await apiClient.getAllEpisodes();
+
+      assert.isArray(response);
+      assert.isEmpty(response);
     });
   });
-
-  // it('when getting all episodes but none is found should return empty array', async () => {
-
-  // });
 });
