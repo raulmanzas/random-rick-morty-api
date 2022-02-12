@@ -3,11 +3,13 @@ const retry = require('axios-retry');
 const logger = require('../../../config/logger');
 
 function logRequest(req) {
-  logger.info(`Making request: ${req}`);
+  logger.info('Making request: ', { req });
+  return req;
 }
 
 function logResponse(res) {
-  logger.info(`Got response: ${res}`);
+  logger.info('Got response: ', { res });
+  return res;
 }
 
 function buildClient(baseUrl, timeout = 1000) {
