@@ -17,7 +17,7 @@ const mockHttpClient = {
 describe('ExternalClient', () => {
   describe('getAllEpisodes', () => {
     before((done) => {
-      const baseUrl = 'https://rickandmortyapi.com/api';
+      const baseUrl = 'http://rickandmortyapi.com/api';
       sinon
         .stub(httpClient, 'buildClient')
         .withArgs(baseUrl)

@@ -1,10 +1,10 @@
 const httpClient = require('./httpClient');
+const environment = require('../../../config/environment');
 
-const EXTERNAL_API_BASE_URL = 'http://rickandmortyapi.com/api';
 const episodesEndpoint = '/episode';
 
 async function getAllEpisodes() {
-  const client = httpClient.buildClient(EXTERNAL_API_BASE_URL);
+  const client = httpClient.buildClient(environment.externalApiBaseUrl);
   const response = await client.get(episodesEndpoint);
   return response.data.results.map((episode) => ({
     id: episode.id,

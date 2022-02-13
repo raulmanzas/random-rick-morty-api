@@ -27,6 +27,8 @@ Follow the steps below to setup the local environment and run the project:
 
     LOG_LEVEL=debug
 
+    EXTERNAL_API_BASE_URL=http://rickandmortyapi.com/api
+
 5. Start the project:
     ```shell 
     $ npm start

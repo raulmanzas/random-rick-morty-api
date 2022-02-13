@@ -20,6 +20,10 @@ const mockEpisodes = [
 ];
 
 describe('episodes controller', () => {
+  afterEach(() => {
+    sinon.restore();
+  });
+
   it('when use case returns list of episodes it should pass them to res object', async () => {
     sinon.stub(useCase, 'getAllEpisodes').returns(mockEpisodes);
     const mockResponse = new MockResponse();
