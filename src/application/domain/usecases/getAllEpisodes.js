@@ -5,7 +5,7 @@ function validateEpisode(rawEpisodeData) {
     throw new Error('An episode was returned from the external API without title');
   }
   const seasonEpisodePattern = /^S\d{2}E\d{2}$/;
-  if (seasonEpisodePattern.test(rawEpisodeData.episode)) {
+  if (!seasonEpisodePattern.test(rawEpisodeData.episode)) {
     throw new Error('An episode was returned from the external API with an invalid season/episode');
   }
 }
