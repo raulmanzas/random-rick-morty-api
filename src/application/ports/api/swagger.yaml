@@ -39,7 +39,7 @@ paths:
                     items:
                       $ref: "#/definitions/Episode"
         "500":
-          description: "Internal Server Error"
+          description: "Unknown error happened"
           schema:
             $ref: "#/definitions/StandardResponse"
 
