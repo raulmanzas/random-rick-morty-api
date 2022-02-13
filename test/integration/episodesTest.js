@@ -21,7 +21,11 @@ describe('Episodes endpoint', () => {
     assert.isDefined(response.body.timestamp);
     assert.isEmpty(response.body.message);
     assert.isArray(response.body.data);
-    assert.strictEqual(response.body.data.length, 3);
+    response.body.data.forEach((episode) => {
+      assert.isDefined(episode.title);
+      assert.isDefined(episode.season);
+      assert.isDefined(episode.episode);
+    });
   });
 
   after((done) => {
