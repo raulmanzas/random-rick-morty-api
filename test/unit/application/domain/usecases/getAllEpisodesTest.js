@@ -39,4 +39,37 @@ describe('get all episodes usecase', () => {
     assert.strictEqual(episodes[0].season, 'S01');
     assert.strictEqual(episodes[0].episode, 'E01');
   });
+
+  it('when external client respondes with episodes without titles it should throw an error', async () => {
+    const episodesWithoutTitle = mockEpisodes.map((episode) => ({
+      id: episode.id,
+      episode: episode.episode
+    }));
+    sinon.stub(externalClientProxy, 'getAllEpisodes').returns(episodesWithoutTitle);
+
+    try {
+      await useCase.getAllEpisodes();
+      assert.fail();
+    } catch (error) {
+      assert.isDefined(error);
+      assert.strictEqual(error.message, 'An episode was returned from the external API without title');
+    }
+  });
+
+  it('when external client respondes with episodes with invalid season/episode it should throw an error', async () => {
+    const episodesWithoutTitle = mockEpisodes.map((episode) => ({
+      id: episode.id,
+      title: episode.title,
+      episode: 'abcd'
+    }));
+    sinon.stub(externalClientProxy, 'getAllEpisodes').returns(episodesWithoutTitle);
+
+    try {
+      await useCase.getAllEpisodes();
+      assert.fail();
+    } catch (error) {
+      assert.isDefined(error);
+      assert.strictEqual(error.message, 'An episode was returned from the external API with an invalid season/episode');
+    }
+  });
 });
