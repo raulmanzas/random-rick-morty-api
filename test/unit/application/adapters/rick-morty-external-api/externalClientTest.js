@@ -16,13 +16,18 @@ const mockHttpClient = {
 
 describe('ExternalClient', () => {
   describe('getAllEpisodes', () => {
-    before((done) => {
+    beforeEach((done) => {
       const baseUrl = 'http://rickandmortyapi.com/api';
       sinon
         .stub(httpClient, 'buildClient')
         .withArgs(baseUrl)
         .returns(mockHttpClient)
         .alwaysCalledWith('/episodes');
+      done();
+    });
+
+    afterEach((done) => {
+      sinon.restore();
       done();
     });
 
