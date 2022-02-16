@@ -3,7 +3,9 @@ const { assert } = require('chai');
 let mockResponse = require('./mockExternalApiResponses.json');
 const apiClient = require('../../../../../src/application/adapters/rick-morty-external-api/externalClient');
 const httpClient = require('../../../../../src/application/adapters/rick-morty-external-api/httpClient');
+const environment = require('../../../../../src/config/environment');
 
+const fakeExternalAPI = 'http://localhost/whatever/api';
 const mockHttpClient = {
   get() {
     return {
@@ -17,10 +19,10 @@ const mockHttpClient = {
 describe('ExternalClient', () => {
   describe('getAllEpisodes', () => {
     beforeEach((done) => {
-      const baseUrl = 'http://rickandmortyapi.com/api';
+      sinon.stub(environment, 'externalApiBaseUrl').value(fakeExternalAPI);
       sinon
         .stub(httpClient, 'buildClient')
-        .withArgs(baseUrl)
+        .withArgs(fakeExternalAPI)
         .returns(mockHttpClient)
         .alwaysCalledWith('/episodes');
       done();
