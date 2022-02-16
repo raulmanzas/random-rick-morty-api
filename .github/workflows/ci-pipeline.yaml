@@ -19,3 +19,8 @@ jobs:
         run: npm run test
       - name: Run integration tests
         run: npm run integration-test
+        env:
+          EXTERNAL_API_BASE_URL: http://rickandmortyapi.com/api
+          NODE_ENV: development
+          PORT: 8080
+          LOG_LEVEL: debug
