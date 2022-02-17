@@ -3,16 +3,34 @@ const environment = require('../../../config/environment');
 
 const episodesEndpoint = '/episode';
 
+function getClient() {
+  return httpClient.buildClient(environment.externalApiBaseUrl);
+}
+
+function mapEpisodeResponse(episodeResponse) {
+  return {
+    id: episodeResponse.id,
+    title: episodeResponse.name,
+    episode: episodeResponse.episode
+  };
+}
+
 async function getAllEpisodes() {
-  const client = httpClient.buildClient(environment.externalApiBaseUrl);
+  const client = getClient();
   const response = await client.get(episodesEndpoint);
-  return response.data.results.map((episode) => ({
-    id: episode.id,
-    title: episode.name,
-    episode: episode.episode
-  }));
+  return response.data.results.map(mapEpisodeResponse);
+}
+
+async function getEpisodeById(id) {
+  if (!id) {
+    throw new Error('The episode id must be supplied in order to fetch its data');
+  }
+  const client = getClient();
+  const response = await client.get(`${episodesEndpoint}/${id}`);
+  return mapEpisodeResponse(response.data);
 }
 
 module.exports = {
-  getAllEpisodes
+  getAllEpisodes,
+  getEpisodeById
 };

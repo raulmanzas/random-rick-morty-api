@@ -55,4 +55,36 @@ describe('ExternalClient', () => {
       assert.isEmpty(response);
     });
   });
+
+  describe('getEpisodeById', () => {
+    const validEpisodeId = 1;
+
+    beforeEach((done) => {
+      sinon.stub(environment, 'externalApiBaseUrl').value(fakeExternalAPI);
+      sinon
+        .stub(httpClient, 'buildClient')
+        .withArgs(fakeExternalAPI)
+        .returns(mockHttpClient)
+        .alwaysCalledWith(`/episodes/${validEpisodeId}`);
+      done();
+    });
+
+    afterEach((done) => {
+      sinon.restore();
+      done();
+    });
+
+    it('when passing an undefined id it should fail', async () => {
+      try {
+        await apiClient.getEpisodeById(undefined);
+        assert.fail();
+      } catch (error) {
+        assert.isDefined(error);
+        assert.strictEqual(
+          error.message,
+          'The episode id must be supplied in order to fetch its data'
+        );
+      }
+    });
+  });
 });
