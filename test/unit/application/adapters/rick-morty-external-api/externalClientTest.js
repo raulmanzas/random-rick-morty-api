@@ -86,5 +86,15 @@ describe('ExternalClient', () => {
         );
       }
     });
+
+    it('when passing a valid id it should return its corresponding episode', async () => {
+      mockResponse = mockResponse.shift();
+      const response = await apiClient.getEpisodeById(1);
+
+      assert.isObject(response);
+      assert.strictEqual(response.id, 1);
+      assert.strictEqual(response.title, mockResponse.name);
+      assert.strictEqual(response.episode, mockResponse.episode);
+    });
   });
 });

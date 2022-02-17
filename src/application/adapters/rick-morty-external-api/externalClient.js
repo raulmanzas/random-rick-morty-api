@@ -27,7 +27,7 @@ async function getEpisodeById(id) {
   }
   const client = getClient();
   const response = await client.get(`${episodesEndpoint}/${id}`);
-  return mapEpisodeResponse(response.data);
+  return mapEpisodeResponse(response.data.results);
 }
 
 module.exports = {
