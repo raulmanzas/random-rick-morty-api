@@ -58,6 +58,7 @@ describe('ExternalClient', () => {
 
   describe('getEpisodeById', () => {
     const validEpisodeId = 1;
+    const originalResponse = mockResponse.slice();
 
     beforeEach((done) => {
       sinon.stub(environment, 'externalApiBaseUrl').value(fakeExternalAPI);
@@ -70,6 +71,7 @@ describe('ExternalClient', () => {
     });
 
     afterEach((done) => {
+      mockResponse = originalResponse;
       sinon.restore();
       done();
     });
@@ -89,10 +91,10 @@ describe('ExternalClient', () => {
 
     it('when passing a valid id it should return its corresponding episode', async () => {
       mockResponse = mockResponse.shift();
-      const response = await apiClient.getEpisodeById(1);
+      const response = await apiClient.getEpisodeById(validEpisodeId);
 
       assert.isObject(response);
-      assert.strictEqual(response.id, 1);
+      assert.strictEqual(response.id, validEpisodeId);
       assert.strictEqual(response.title, mockResponse.name);
       assert.strictEqual(response.episode, mockResponse.episode);
     });
