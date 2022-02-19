@@ -2,19 +2,7 @@ const { assert } = require('chai');
 const sinon = require('sinon');
 const externalClientProxy = require('../../../../../src/application/domain/proxies/externalApiProxy');
 const useCase = require('../../../../../src/application/domain/usecases/getAllEpisodes');
-
-const mockEpisodes = [
-  {
-    id: 1,
-    title: 'a episode',
-    episode: 'S01E01'
-  },
-  {
-    id: 2,
-    title: 'another episode',
-    episode: 'S01E02'
-  }
-];
+const mockEpisodes = require('./mockEpisodes.json');
 
 describe('get all episodes usecase', () => {
   afterEach(() => {
@@ -34,7 +22,7 @@ describe('get all episodes usecase', () => {
     const episodes = await useCase.getAllEpisodes();
 
     assert.isArray(episodes);
-    assert.strictEqual(episodes.length, 2);
+    assert.strictEqual(episodes.length, 3);
     assert.strictEqual(episodes[0].title, mockEpisodes[0].title);
     assert.strictEqual(episodes[0].season, 'S01');
     assert.strictEqual(episodes[0].episode, 'E01');

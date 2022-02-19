@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "a episode",
+    "episode": "S01E01"
+  },
+  {
+    "id": 2,
+    "title": "another episode",
+    "episode": "S01E02"
+  },
+  {
+    "id": 3,
+    "title": "a third episode",
+    "episode": "S01E03"
+  }
+]
