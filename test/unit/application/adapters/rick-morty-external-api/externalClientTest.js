@@ -6,9 +6,11 @@ const httpClient = require('../../../../../src/application/adapters/rick-morty-e
 const environment = require('../../../../../src/config/environment');
 
 const fakeExternalAPI = 'http://localhost/whatever/api';
+let responseStatus = httpClient.responseStatus.HTTP_SUCCESS;
 const mockHttpClient = {
   get() {
     return {
+      status: responseStatus,
       data: {
         results: mockResponse
       }
@@ -72,6 +74,7 @@ describe('ExternalClient', () => {
 
     afterEach((done) => {
       mockResponse = originalResponse;
+      responseStatus = httpClient.responseStatus.HTTP_SUCCESS;
       sinon.restore();
       done();
     });
@@ -97,6 +100,30 @@ describe('ExternalClient', () => {
       assert.strictEqual(response.id, validEpisodeId);
       assert.strictEqual(response.title, mockResponse.name);
       assert.strictEqual(response.episode, mockResponse.episode);
+    });
+
+    it('when an non existent episode id is passed it should fail', async () => {
+      responseStatus = httpClient.responseStatus.HTTP_NOT_FOUND;
+
+      try {
+        await apiClient.getEpisodeById(9);
+        assert.fail();
+      } catch (error) {
+        assert.isDefined(error);
+        assert.strictEqual(error.message, 'Requested episode could not be found');
+      }
+    });
+
+    it('when an unexpected error happens it should fail', async () => {
+      responseStatus = httpClient.responseStatus.HTTP_SERVER_ERROR;
+
+      try {
+        await apiClient.getEpisodeById(validEpisodeId);
+        assert.fail();
+      } catch (error) {
+        assert.isDefined(error);
+        assert.strictEqual(error.message, 'Unexpected error happened while fetching episode data');
+      }
     });
   });
 });
