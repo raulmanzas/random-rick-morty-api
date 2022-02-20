@@ -12,6 +12,9 @@ const mockHttpClient = {
     return {
       status: responseStatus,
       data: {
+        info: {
+          count: mockResponse.length
+        },
         results: mockResponse
       }
     };
@@ -124,6 +127,30 @@ describe('ExternalClient', () => {
         assert.isDefined(error);
         assert.strictEqual(error.message, 'Unexpected error happened while fetching episode data');
       }
+    });
+  });
+
+  describe('getNumberOfEpisodes', () => {
+    beforeEach((done) => {
+      sinon.stub(environment, 'externalApiBaseUrl').value(fakeExternalAPI);
+      sinon
+        .stub(httpClient, 'buildClient')
+        .withArgs(fakeExternalAPI)
+        .returns(mockHttpClient)
+        .alwaysCalledWith('/episodes');
+      done();
+    });
+
+    afterEach((done) => {
+      sinon.restore();
+      done();
+    });
+
+    it('when fetching total number of episodes it should return a valid integer', async () => {
+      const numberOfEpisodes = await apiClient.getNumberOfEpisodes();
+
+      assert.isNumber(numberOfEpisodes);
+      assert.strictEqual(numberOfEpisodes, mockResponse.length);
     });
   });
 });
