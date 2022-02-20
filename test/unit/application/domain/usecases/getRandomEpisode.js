@@ -17,6 +17,7 @@ describe('get random episode use case', () => {
     sinon
       .stub(externalClientProxy, 'getEpisodeById')
       .returns(mockEpisodes[0]);
+    sinon.stub(externalClientProxy, 'getNumberOfEpisodes').returns(mockEpisodes.length);
 
     const randomEpisode = await useCase.getRandomEpisode();
 
@@ -29,6 +30,18 @@ describe('get random episode use case', () => {
 
   it('when an unexpected error happens while fetching random episode it should fail', async () => {
     sinon.stub(externalClientProxy, 'getEpisodeById').throws(new Error('some error'));
+    sinon.stub(externalClientProxy, 'getNumberOfEpisodes').returns(mockEpisodes.length);
+    try {
+      await useCase.getRandomEpisode();
+      assert.fail();
+    } catch (error) {
+      assert.isDefined(error);
+      assert.strictEqual(error.message, 'some error');
+    }
+  });
+
+  it('when an unexpected error happens while fetching the total number of episodes it should fail', async () => {
+    sinon.stub(externalClientProxy, 'getNumberOfEpisodes').throws(new Error('some error'));
     try {
       await useCase.getRandomEpisode();
       assert.fail();

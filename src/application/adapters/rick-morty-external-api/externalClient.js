@@ -40,7 +40,14 @@ async function getEpisodeById(id) {
   return mapEpisodeResponse(response.data.results);
 }
 
+async function getNumberOfEpisodes() {
+  const client = getClient();
+  const response = await client.get(episodesEndpoint);
+  return response.data.info.count;
+}
+
 module.exports = {
   getAllEpisodes,
-  getEpisodeById
+  getEpisodeById,
+  getNumberOfEpisodes
 };

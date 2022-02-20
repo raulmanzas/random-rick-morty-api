@@ -6,7 +6,8 @@ function getRandomId(totalEpisodes) {
 }
 
 async function getRandomEpisode() {
-  const randomEpisodeId = getRandomId(3);
+  const totalNumberOfEpisodes = await externalClientProxy.getNumberOfEpisodes();
+  const randomEpisodeId = getRandomId(totalNumberOfEpisodes);
   const selectedEpisode = await externalClientProxy.getEpisodeById(randomEpisodeId);
   return episode.parseRawEpisode(selectedEpisode);
 }

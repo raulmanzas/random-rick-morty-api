@@ -2,5 +2,6 @@ const externalApiClient = require('../../adapters/rick-morty-external-api/extern
 
 module.exports = {
   getAllEpisodes: externalApiClient.getAllEpisodes,
-  getEpisodeById: externalApiClient.getEpisodeById
+  getEpisodeById: externalApiClient.getEpisodeById,
+  getNumberOfEpisodes: externalApiClient.getNumberOfEpisodes
 };
